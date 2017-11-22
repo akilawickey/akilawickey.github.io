@@ -1,4 +1,3 @@
-# asak.github.io
+# akilawickey.github.io
 
-
-This is for my online coding
+This is my personal profile
