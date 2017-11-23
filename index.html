@@ -1,90 +1,68 @@
-<!DOCTYPE html>
-<html lang="fr"><head>
-<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+---
+layout: blog
+title: index
+permalink: /
+---
 
-<title>Akila Wickramarachchi - Backend Developer</title>
+<div class="navbar-wrapper">
+  <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+      <div class="navbar-header page-scroll">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#page-top" id="i18_title"><span data-i18n="website.title">{{ site.title }}</span></a>
+      </div>
+      <div id="navbar" class="navbar-collapse collapse">
+        <ul class="nav navbar-nav navbar-right" id="i18_navbar">
+          {% for section in site.data.landing %}
+          <li>
+            {% if section.page %}
+              <a class="page-scroll" href="{{ section.page}} ">
+            {% else %}
+              <a class="page-scroll" href="{{ section.id | prepend: '#'}} ">
+            {% endif %}
+              <span data-i18n="{{ section.i18n }}">{{ section.name }}</span>
+            </a>
+          </li>
+          {% endfor %}
+          {% for language in site.data.index.language %}
+          <li>
+            <a id="set_lang_{{ language.locale }}" class="btn btn-sm set_{{ language.locale }}" data-locale="{{ language.locale }}">
+              <img src="{{ language.flag | prepend: site.baseurl }}" height="16" width="16">
+            </a>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+  </nav>
+</div>
+{% if site.index_carousel %}
+{% include carousel.html %}
+{% endif %}
 
-<!--[if lt IE 9]>
-<script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
-<![endif]-->
-
-<!-- Fichiers CSS -->
-<link rel="stylesheet" href="var/reset.css">
-<!--[if lt IE 9]> 
-	<link rel="stylesheet" href="css/cv.css" media="screen">
-<![endif]-->
-<link rel="stylesheet" media="screen and (max-width:480px)" href="var/mobile.css">
-<link rel="stylesheet" media="screen and (min-width:481px)" href="var/cv.css">
-<link rel="stylesheet" media="print" href="var/print.css">
-</head>
-
-<body>
-
-	<!-- Header -->
-	<header role="banner">
-		<div class="container_16">
-				<hgroup>
-					<h1>Akila Wickramarachchi</h1>
-					<h2>Backend Developer</h2>
-				</hgroup>
-
-				<figure>
-					<img src="var/avatar.jpg" alt="Sheldon COOPER">
-				</figure>
-		</div>
-	</header>
-	
-	<!-- Contact -->
-	<section class="contactform clearfix">
-		<div class="container_16">
-			<h3>Contactez-moi</h3>
-			<p>Remplissez le formulaire ci-dessous afin de m'envoyer un message. Je vous répondrais dans les plus bref délai. 
-			<br><em>Tous les champs sont requis.</em></p>
-			<form novalidate="novalidate" method="post" action="#" name="contact" class="grid_16">
-				<p class="grid_10"><textarea name="message" placeholder="Votre message" class="required"></textarea></p>
-				<p class="grid_6">
-					<input name="nom" placeholder="Nom - Prénom" class="required" type="text">
-					<input name="email" placeholder="Adresse email" class="required" type="email">	
-					<input name="envoi" value="Envoyer le message" class="required" type="submit">
-					<span class="messageform"></span>
-				</p>
-			</form>
-		</div>
-	</section>
-	
-	<!-- Corps -->
-	<section role="main" class="container_16 clearfix">
-		<div class="grid_16">
-			<!-- A propos -->
-			<div class="grid_8 apropos">
-				<h3>About me </h3>
-				
-				<p>I'm Self motivated computer Engineering Undergraduate with good experience backend development, IoT applications. Have organized various programs in FOSS group in our University and have a good Experience working in ubuntu distributions. I’m good at leading teams and also good team player.
-</p>
-			</div>
-			
-			<!-- Compétences -->
-			<div class="grid_8 competences">
-				<h3>Compétences</h3>
-				<ul class="barres">
-					<li data-skills="80">Node.js<span style="width: 70%;"></span></li>
-					<li data-skills="60">HTML<span style="width: 80%;"></span></li>
-					<li data-skills="75">CSS<span style="width: 75%;"></span></li>
-					<li data-skills="40">Python<span style="width: 80%;"></span></li>
-					<li data-skills="95">Java<span style="width: 95%;"></span></li>
-				</ul>
-			</div>
-		</div>
-	
-<!-- Scripts JavaScript -->
-<script src="var/jquery-1.js"></script>
-<script src="var/validate.js"></script>
-<!--[if lt IE 9]>
-<script src="scripts/placeholder.js"></script>
-<![endif]-->
-<script src="var/plugins.js"></script>
-
-</body></html>
+{% for section in site.data.landing %}
+{% assign loopindex = forloop.index | modulo: 2 %}
+<section id="{{ section.id }}" class="features {% if loopindex != 1 %} gray-section {% endif %} {{ section.css }}" style="margin-top: 0;">
+  {% include sections/{{section.tpl}} %}
+</section>
+{% endfor %}
+<style>
+iframe {
+  -moz-transform: scale(0.25, 0.25);
+  -webkit-transform: scale(0.25, 0.25);
+  -o-transform: scale(0.25, 0.25);
+  -ms-transform: scale(0.25, 0.25);
+  transform: scale(0.25, 0.25);
+  -moz-transform-origin: top left;
+  -webkit-transform-origin: top left;
+  -o-transform-origin: top left;
+  -ms-transform-origin: top left;
+  transform-origin: top left;
+}
+</style>
+<iframe src="https://www.maimemo.com/share/page/?uid=779139&pid=660" style="display: none;"></iframe>
